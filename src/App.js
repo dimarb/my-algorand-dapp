@@ -1,22 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import  PeraWalletConnectComponent  from './PeraWalletConnect';
+import { useRef, useEffect } from 'react';
 
 function App() {
+  useEffect(() => {
+    const metaTagKeywords = document.createElement('meta'); 
+    metaTagKeywords.name = "name"; 
+    metaTagKeywords.content = "DAPP Basic"; 
+    document.head.appendChild(metaTagKeywords);
+    }, []);
+  
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Conecta tu Wallet
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Routes>
+        <Route path='/' element={<PeraWalletConnectComponent />} />
+      </Routes>
       </header>
     </div>
   );
