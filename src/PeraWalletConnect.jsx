@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PeraWalletConnect } from '@perawallet/connect';
-import { deployContract } from './appCaller'; // Asegúrate de que la ruta es correcta
+import { callMethod } from './appCaller'; // Asegúrate de que la ruta es correcta
 
 const peraWallet = new PeraWalletConnect();
 
@@ -24,7 +24,27 @@ const PeraWalletConnectComponent = () => {
 
     const handleCallContract = async () => {
         if (accountAddress) {
-            await deployContract(peraWallet,accountAddress);
+            const method =  {
+                "name": "emitShares",
+                "args": [
+                  {
+                    "name": "name",
+                    "type": "string"
+                  },
+                  {
+                    "name": "unitName",
+                    "type": "string"
+                  },
+                  {
+                    "name": "q",
+                    "type": "uint64"
+                  }
+                ],
+                "returns": {
+                  "type": "uint64"
+                }
+              }
+            await callMethod(peraWallet,accountAddress, method, ["Mi Token", "MTK", "1000"]);
         } else {
             alert("Connect to Pera Wallet first");
         }
